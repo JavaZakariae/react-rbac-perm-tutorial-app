@@ -35,12 +35,12 @@ const PostsList = () => (
                     perform="posts:edit:admin"
                     dynamicPerform="posts:edit"
                     dynamicFunction={isOwnPost}
-                    data={{
+                    dynamicData={{
                       userId: user.id,
                       postOwnerId: post.ownerId
                     }}
                     yes={() => (
-                      <button className="btn btn-sm btn-default">
+                      <button className="btn btn-sm btn-primary">
                         Edit Post
                       </button>
                     )}
@@ -49,12 +49,12 @@ const PostsList = () => (
                     user={user}
                     dynamicPerform="posts:comment"
                     dynamicFunction={isNotOwnPost}
-                    data={{
+                    dynamicData={{
                       userId: user.id,
                       postOwnerId: post.ownerId
                     }}
                     yes={() => (
-                      <button className="btn btn-sm btn-default">
+                      <button className="btn btn-sm btn-warning">
                         Comment Post
                       </button>
                     )}
