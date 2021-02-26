@@ -1,12 +1,12 @@
+import { useContext } from 'react'
+import { AuthContext } from "../authContext";
+
+
 const check = (user, permission, dynamicPermission, dynamicFunction, dynamicData) => {
   const userPermissions = user.permissions;
 
   if (permission && userPermissions && userPermissions.includes(permission)) {
     return true;
-  }
-
-  if(dynamicPermission === 'posts:comment'){
-    console.log('posts:comment');
   }
 
   if (dynamicPermission && dynamicFunction && userPermissions && userPermissions.includes(dynamicPermission)) {
@@ -17,14 +17,17 @@ const check = (user, permission, dynamicPermission, dynamicFunction, dynamicData
 
 };
 
-const Can = props =>
-  check(props.user, props.perform, props.dynamicPerform, props.dynamicFunction, props.dynamicData)
+const CanUser = props => {
+  const authContext = useContext(AuthContext)
+  const user = authContext.user
+  return check(user, props.perform, props.dynamicPerform, props.dynamicFunction, props.dynamicData)
     ? props.yes()
     : props.no();
+}
 
-Can.defaultProps = {
+CanUser.defaultProps = {
   yes: () => null,
   no: () => null
 };
 
-export default Can;
+export default CanUser;
